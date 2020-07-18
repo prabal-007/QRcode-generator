@@ -1,4 +1,6 @@
 from tkinter import *
+from PIL import Image, ImageTk
+import cv2
 
 root = Tk()
 def qrcode():
@@ -9,6 +11,13 @@ def qrcode():
     filename = 'myQR.png'
     img = qrcode.make(data)
     img.save(filename)
+
+    image = cv2.imread(filename)
+    resized = cv2.resize(image,(150,150))
+    # photo = ImageTk.PhotoImage(ret)
+    ret = cv2.imshow('QR',resized)
+    Label(root,image=ret).grid()
+
 root.title('QR-generator')
 root.geometry('500x400')
 root.configure(background='gray')
