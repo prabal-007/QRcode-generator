@@ -1,6 +1,24 @@
-import qrcode
+from tkinter import *
 
-data = '127.0.0.1'             # data you want to generate qr code for.
-filename = 'myQR.png'
-img = qrcode.make(data)
-img.save(filename)
+root = Tk()
+def qrcode():
+    import qrcode
+    # data - data you want to generate qr code for.
+    if var =='': data = 'You have not entered anything'
+    else: data = var.get()
+    filename = 'myQR.png'
+    img = qrcode.make(data)
+    img.save(filename)
+root.title('QR-generator')
+root.geometry('500x400')
+root.configure(background='gray')
+Label(root, text='QR-code Generator', font='arial 15 bold').grid(pady='20',column=2)
+data = Label(root,text='Enter data/content',bg='gray', font='arial 14', padx='5')
+data.grid(padx=20, row=1,pady='5')
+var = StringVar()
+dataentry = Entry(root, textvariable=var,font='arial 14')
+dataentry.grid(row=1, column=2)
+Button(root,text='Get Code', command=qrcode, activebackground='orange').grid(column=2,pady='10')
+
+
+root.mainloop()
