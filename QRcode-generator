@@ -1,0 +1,6 @@
+import qrcode
+
+data = '127.0.0.1'             # data you want to generate qr code for.
+filename = 'myQR.png'
+img = qrcode.make(data)
+img.save(filename)
