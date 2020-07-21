@@ -1,22 +1,40 @@
 from tkinter import *
 from PIL import Image, ImageTk
 import cv2
+import tkinter.messagebox as tmsg
 
 root = Tk()
+
 def qrcode():
     import qrcode
-    # data - data you want to generate qr code for.
-    if var =='': data = 'You have not entered anything'
-    else: data = var.get()
-    filename = 'myQR.png'
-    img = qrcode.make(data)
-    img.save(filename)
+    # data - data you want to generate qr code for
+    if var.get() !='':
+        data = var.get()
+        print('ok data')
+    else:
+        showEmpty = Label(root,text='Data field is empty!', font='arial 12', fg='red')
+        showEmpty.grid(column=2, pady='10')
+        print('ok data-1')
+    fileName = f'{filevar.get()}.png'
+    if fileName == f'.png':
+        fileEmpty = Label(root,text='enter a file name!', font='arial 12', fg='red')
+        fileEmpty.grid(column=2, pady='10')
+    else:
+        root.update()
+        print(fileName)
+        img = qrcode.make(data)
+        img.save(f'{filevar.get()}.png')
+    # root.configure(Image=f'{filevar.get()}.png')
+        image = cv2.imread(fileName)
+        resized = cv2.resize(image,(150,150))
+        # photo = ImageTk.PhotoImage(ret)
+        ret = cv2.imshow('QR',resized)
+        Label(root,image=ret).grid()
 
-    image = cv2.imread(filename)
-    resized = cv2.resize(image,(150,150))
-    # photo = ImageTk.PhotoImage(ret)
-    ret = cv2.imshow('QR',resized)
-    Label(root,image=ret).grid()
+def exi():
+    value = tmsg.askyesno('Exit','Exit,Are you Sure?')
+    if value == True:
+        root.destroy()
 
 root.title('QR-generator')
 root.geometry('500x400')
@@ -27,7 +45,14 @@ data.grid(padx=20, row=1,pady='5')
 var = StringVar()
 dataentry = Entry(root, textvariable=var,font='arial 14')
 dataentry.grid(row=1, column=2)
-Button(root,text='Get Code', command=qrcode, activebackground='orange').grid(column=2,pady='10')
-
+filename = Label(root,text='File Name', bg='gray', font='arial 14', padx='5')
+filename.grid(padx=20, row=2,pady='5')
+filevar = StringVar()
+fileentry = Entry(root, textvariable=filevar,font='arial 14')
+fileentry.grid(row=2, column=2)
+Button(root,text='Get QR Code', command=qrcode, activebackground='orange').grid(column=2,pady='10')
+frm = Frame(root, bg='yellow')
+Button(frm,text='Exit',font='arial 10',fg='red',activebackground='orange',padx='5',command=exi).pack(side=LEFT)
+frm.grid(column=2)
 
 root.mainloop()
