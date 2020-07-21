@@ -10,26 +10,24 @@ def qrcode():
     # data - data you want to generate qr code for
     if var.get() !='':
         data = var.get()
-        print('ok data')
     else:
-        showEmpty = Label(root,text='Data field is empty!', font='arial 12', fg='red')
-        showEmpty.grid(column=2, pady='10')
-        print('ok data-1')
+        tmsg.showwarning('empty field','Data field is empty!')
+    
     fileName = f'{filevar.get()}.png'
     if fileName == f'.png':
-        fileEmpty = Label(root,text='enter a file name!', font='arial 12', fg='red')
-        fileEmpty.grid(column=2, pady='10')
+        tmsg.showwarning('Empty field','enter a file name!')
     else:
-        root.update()
         print(fileName)
         img = qrcode.make(data)
-        img.save(f'{filevar.get()}.png')
-    # root.configure(Image=f'{filevar.get()}.png')
+        img.save(fileName)
+        photo = PhotoImage(fileName)
+        imgr=Label(root,image=photo)
+        imgr.grid()
+
         image = cv2.imread(fileName)
         resized = cv2.resize(image,(150,150))
-        # photo = ImageTk.PhotoImage(ret)
-        ret = cv2.imshow('QR',resized)
-        Label(root,image=ret).grid()
+        cv2.imshow('QR',resized)
+        # Label(root,image=ret).grid()
 
 def exi():
     value = tmsg.askyesno('Exit','Exit,Are you Sure?')
