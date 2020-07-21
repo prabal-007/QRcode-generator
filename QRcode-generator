@@ -29,6 +29,20 @@ def qrcode():
         cv2.imshow('QR',resized)
         # Label(root,image=ret).grid()
 
+def about():
+    # root.destroy()
+    root3=Tk()
+    root3.geometry('500x300')
+    Label(root3, text='by Prabal Gupta', anchor='e', fg='white', bg='black').pack(side=BOTTOM, fil=X)
+    root3.configure(background='gold')
+    root3.title('guessTheNO.- About')
+    head=Label(root3, text='About', font='arial 18 bold')
+    head.pack(pady='20')
+    cont=Label(root3, text='Name - QR code Generator\n\nVersion - strQR-g.0.3\n\nDeveloper - Prabal Gupta\n\ngithub - https://github.com/prabal-007', font='arial 12 bold')
+    cont.pack(pady='20')
+    root3.mainloop()
+
+
 def exi():
     value = tmsg.askyesno('Exit','Exit,Are you Sure?')
     if value == True:
@@ -62,5 +76,10 @@ button1.pack(side=LEFT, padx='10',pady='10')
 button2 = Button(frm3,text='Exit',font='arial 10',fg='red',bg='dark gray',activebackground='orange',padx='5',command=exi)
 button2.pack(side=RIGHT, padx='10',pady='10')
 frm3.pack(pady='20')
+endFrm = Frame(root,bg='red')
+Label(endFrm,text='by Prabal Gupta',bg='red').pack(anchor='e',padx=5,side=RIGHT)
+Label(endFrm,text='©by strQR-g.0.3',bg='red').pack(anchor='w',padx=5,side=LEFT)
+endFrm.pack(fill=X,side=BOTTOM)
+Button(root,text='About us', command=about,padx=10,bg='brown',activebackground='orange').pack(side=BOTTOM,padx=10)
 
 root.mainloop()
