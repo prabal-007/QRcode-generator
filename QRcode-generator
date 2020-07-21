@@ -20,9 +20,9 @@ def qrcode():
         print(fileName)
         img = qrcode.make(data)
         img.save(fileName)
-        photo = PhotoImage('F:\\vsCode-python\\QR-generator\\'f'{fileName}')
-        imgr=Label(root,image=photo)
-        imgr.grid()
+        # photo = PhotoImage('F:\\vsCode-python\\QR-generator\\'f'{fileName}')
+        # imgr=Label(root,image=photo)
+        # imgr.grid()
 
         image = cv2.imread(fileName)
         resized = cv2.resize(image,(150,150))
