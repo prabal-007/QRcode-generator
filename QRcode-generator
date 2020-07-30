@@ -4,7 +4,6 @@ import cv2
 import tkinter.messagebox as tmsg
 
 root = Tk()
-
 def qrcode():
     import qrcode
     # data - data you want to generate qr code for
